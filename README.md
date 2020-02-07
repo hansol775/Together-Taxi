@@ -10,7 +10,8 @@
 7. 다른 사람들도 본인 분야에서 작업한 걸 PR를 보냄 
 8. develop 브랜치에서 충돌 일어나면 해결 후 버그가 없는 걸 확인 한 다음 조직 로컬 저장소에서 develop을 master로 merge함
 9. (최신화) 본인 로컬 저장소에 upstream 원격저장소를 만든 후 조직 원격 저장소(master)를 fetch 함 
-    - ```git remote add upstream "조직 원격 저장소 주소"```
+    - ```
+    git remote add upstream "조직 원격 저장소 주소"```
     - ```git fetch upstream```
     - 자기 로컬 저장소의 브랜치(feature)로 이동 ```git checkout feature/```
     - 머지하기 ```git merge upstream/master -> 본인 로컬 저장소(feature/)에 조직 원격 저장소(master)를 머지함```
