@@ -1062,6 +1062,15 @@
     shortid "^2.2.15"
     use-subscription "^1.3.0"
 
+"@react-navigation/drawer@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-5.0.0.tgz#de821fa93a903cc1d21a929c978e9df037e1ae9e"
+  integrity sha512-ebVrDbUMEd+IvoYT9oYMw5HssLal7LFKaFqzIZW6Opph+aTrMtdvP9X8+21lnTdqBZj1TIJMdAPbkuxzNrIKMQ==
+  dependencies:
+    "@react-navigation/routers" "^5.0.0"
+    color "^3.1.2"
+    react-native-iphone-x-helper "^1.2.1"
+
 "@react-navigation/native@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.0.0.tgz#6fcf4a24249229005ddfaf40be1d35fcbe0e16c2"
@@ -3114,9 +3123,9 @@ growly@^1.3.0:
   resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
   integrity sha1-8QdIy+dq+WS3yWyTxrzCivEgwIE=
 
-"hammerjs@git+https://github.com/naver/hammer.js.git":
+"hammerjs@https://github.com/naver/hammer.js.git":
   version "2.0.17-snapshot"
-  resolved "git+https://github.com/naver/hammer.js.git#54bc698b25edd6e1b76ca975ebaced5ce0467d51"
+  resolved "https://github.com/naver/hammer.js.git#54bc698b25edd6e1b76ca975ebaced5ce0467d51"
   dependencies:
     "@types/hammerjs" "^2.0.36"
 

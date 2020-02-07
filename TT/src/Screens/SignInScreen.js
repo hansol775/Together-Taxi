@@ -7,7 +7,7 @@ function SignInScreen({navigation}) {
             <Text>로그인 화면입니다.</Text>
             <Button
                 title="로그인"
-                onPress={() => navigation.navigate('Map')}
+                onPress={() => navigation.navigate('MapDrawer')}
             />
         </View>
     );
