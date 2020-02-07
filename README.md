@@ -1,5 +1,6 @@
 # 🔥PR, merge, push 방법
----
+***
+!!!중요 코드를 짧게 작성 후 PR 보내기 (길면 충돌 발생 위험 커짐)
 1. organization 원격 저장소에서 본인 원격(origin) 저장소에 `fork` 하기
 2. 본인 원격(origin) 저장소에서 본인 로컬 저장소로 `clone` 하기
 3. feature/OOO 브랜치 만들고 `checkout` 후 여기에 `commit` 하기
