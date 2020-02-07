@@ -1,6 +1,6 @@
 # 🔥PR, merge, push 방법
 
-1. organization 저장소 본인 origin 저장소에 fork 하기
+1. organization 원격 저장소에서 본인 원격(origin) 저장소에 fork 하기
 2. 본인 origin 저장소에서 본인 로컬 저장소로 clone 하기
 3. feature/OOO 브랜치 만들고 여기에 commit 하기
 4. 코딩이 끝나면 본인 origin 저장소에 feature/ 브랜치로 push하기
