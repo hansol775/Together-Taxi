@@ -1,4 +1,4 @@
-# PR, merge, push 방법
+# 🔥PR, merge, push 방법
 
 1. organization 저장소 본인 origin 저장소에 fork 하기
 2. 본인 origin 저장소에서 본인 로컬 저장소로 clone 하기
