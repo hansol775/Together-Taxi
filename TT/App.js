@@ -1,11 +1,19 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import SignInNavigator from './src/Navigator/SignInNavigator';
+
+const Stack = createStackNavigator();
 
 function App() {
-  return(
-    <View style={{alignItems: 'center', justifyContent:'center', flex: 1}}>
-      <Text>Hello World!</Text>
-    </View>
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="SignInNav" component={SignInNavigator} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
+
 export default App;
