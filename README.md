@@ -14,3 +14,4 @@
     - 자기 로컬 저장소의 브랜치(feature)로 이동 git checkout feature/
     - 머지하기 git merge upstream/master -> 본인 로컬 저장소(feature/)에 조직 원격 저장소(master)를 머지함
     - 그 다음 본인 원격 저장소(origin)에 push하기 git push origin feature/
+![KakaoTalk_Photo_2020-02-07-17-06-05](https://user-images.githubusercontent.com/57027805/74011861-333ccc80-49cc-11ea-8f33-a4312dc649ca.jpeg)
