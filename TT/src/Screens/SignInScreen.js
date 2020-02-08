@@ -89,6 +89,10 @@ function SignInScreen({navigation}) {
                 title="로그아웃"
                 onPress={()=> signOut()}
                 />
+            <Button
+                title="Map"
+                onPress={() => navigation.navigate('MapDrawer')}
+            />
         </View>
     );
 }
