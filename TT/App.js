@@ -10,7 +10,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Navigator" component={Navigator} />
+        <Stack.Screen name="Navigator" component={Navigator} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
