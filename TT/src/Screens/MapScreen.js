@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { View, Text, Button, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import axios from 'axios';
 
@@ -36,19 +36,15 @@ const NaverSearch = () => {
 function MapScreen({navigation}) {
     const [keyWord, inputKeyWord] = useState('목적지 검색');
     return (
-        <View style={{alignItems:'center', justifyContent:'center', flex:1, flexDirection: 'row'}}>
-            <MapView style={{flex: 1, width:'100%', height:'100%', justifyContent:'space-around', flexDirection: 'row'}} provider={PROVIDER_GOOGLE}>
-                <TextInput 
-                    style={{borderWidth:1, width:200, height: 40, alignSelf: 'auto'}}
-                    onChangeText={text => inputKeyWord(text)}
-                    value = {keyWord}
-                />
-                <Button
-                    style={{alignSelf: 'auto'}}
-                    title="검색"
-                    onPress={NaverSearch}
-                />
+        <View style={StyleSheet.absoluteFillObject}>
+            <MapView
+                style={StyleSheet.absoluteFillObject} provider={PROVIDER_GOOGLE}>
             </MapView>
+            <View style={{position:'absolute'}}>
+                <Button
+                    title="검색"
+                />
+            </View>
         </View>
     );
 }
