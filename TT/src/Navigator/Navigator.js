@@ -7,6 +7,7 @@ import SignInScreen from '../Screens/SignInScreen';
 import MapScreen from '../Screens/MapScreen';
 import ChatListScreen from '../Screens/ChatListScreen';
 import ChattingScreen from '../Screens/ChattingScreen';
+import tmp from '../Screens/CreateChatScreen';
 
 const ChatStack = createStackNavigator();
 
@@ -15,9 +16,10 @@ function ChattingStack() {
         <ChatStack.Navigator>
             <ChatStack.Screen name="ChatList" component={ChatListScreen}/>
             <ChatStack.Screen name="Chatting" component={ChattingScreen}/>
+            <ChatStack.Screen name="ChatCre" component={tmp}/>
         </ChatStack.Navigator>
     )
-}
+};
 
 const Drawer = createDrawerNavigator();
 
@@ -29,7 +31,7 @@ function MapDrawer() {
             <Drawer.Screen name="Chat" component={ChattingStack} />
         </Drawer.Navigator>
     );
-}
+};
 
 const Stack = createStackNavigator();
 
@@ -41,6 +43,6 @@ function SignInNavigator() {
             <Stack.Screen name="MapDrawer" component={MapDrawer} />
         </Stack.Navigator>
     );
-}
+};
 
 export default SignInNavigator;
