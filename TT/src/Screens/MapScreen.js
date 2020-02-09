@@ -1,8 +1,8 @@
-
 import React, {useState} from 'react';
 import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import axios from 'axios';
+
 
 const client_id = "eDiVdTnGWLaOJWuEnE45";
 const client_secret = "RSG1rNXCw0";
@@ -25,7 +25,7 @@ const NaverSearch = ({keyWord}) => {
         const nameList = res.data;
         var stringjson = JSON.stringify(nameList);
         search_List = JSON.parse(stringjson);
-        for(var i=0;i<10;i++){
+        for (var i = 0; i < 10; i++) {
             // console.log(search_List.items[i]['name']);
             console.log(search_List.items[i]['title']);
         }
@@ -35,9 +35,11 @@ const NaverSearch = ({keyWord}) => {
     })
 }
 
-function MapScreen({navigation}) {
+function MapScreen({ navigation }) {
     const [keyWord, inputKeyWord] = useState('목적지 검색');
+
     return (
+
         <View style={StyleSheet.absoluteFillObject}>
             <MapView
                 style={StyleSheet.absoluteFillObject} provider={PROVIDER_GOOGLE}>
@@ -49,6 +51,7 @@ function MapScreen({navigation}) {
                     value={keyWord}
                 />
                 <Button
+
                     title="검색"
                     onPress={() => NaverSearch({keyWord})}
                 />
