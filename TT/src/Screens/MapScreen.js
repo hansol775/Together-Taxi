@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { View, Text, Button, TextInput } from 'react-native';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import React, {useState} from 'react';
+import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import axios from 'axios';
 
 
@@ -9,16 +9,17 @@ const client_secret = "RSG1rNXCw0";
 
 //검색결과 
 var search_List;
+var str='사상';
 
 //검색 키워드
-const NaverSearch = () => {
-    axios.get('https://openapi.naver.com/v1/search/local.json?display=10&start=1', {
+const NaverSearch = ({keyWord}) => {
+    axios.get('https://openapi.naver.com/v1/search/local.json?display=10&start=1',{
         headers: {
             'X-Naver-Client-Id': 'eDiVdTnGWLaOJWuEnE45',
             'X-Naver-Client-Secret': 'RSG1rNXCw0'
         },
         params: {
-            query: '사상',
+            query: `${keyWord}`,
         }
     }).then(res => {
         const nameList = res.data;
@@ -28,7 +29,7 @@ const NaverSearch = () => {
             // console.log(search_List.items[i]['name']);
             console.log(search_List.items[i]['title']);
         }
-        //console.log(search_List);
+        console.log(search_List);
     }).catch(error => {
         console.log(error);
     })
@@ -38,19 +39,23 @@ function MapScreen({ navigation }) {
     const [keyWord, inputKeyWord] = useState('목적지 검색');
 
     return (
-        <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row' }}>
-            <MapView style={{ flex: 1, width: '100%', height: '100%', justifyContent: 'space-around', flexDirection: 'row' }} provider={PROVIDER_GOOGLE}>
+
+        <View style={StyleSheet.absoluteFillObject}>
+            <MapView
+                style={StyleSheet.absoluteFillObject} provider={PROVIDER_GOOGLE}>
+            </MapView>
+            <View style={{flex: 1, position:'absolute', flexDirection: 'row'}}>
                 <TextInput
-                    style={{ borderWidth: 1, width: 200, height: 40, alignSelf: 'auto' }}
+                    style={{borderWidth:1, width: 100, height: 40}}
                     onChangeText={text => inputKeyWord(text)}
                     value={keyWord}
                 />
                 <Button
-                    style={{ alignSelf: 'auto' }}
+
                     title="검색"
-                    onPress={NaverSearch}
+                    onPress={() => NaverSearch({keyWord})}
                 />
-            </MapView>
+            </View>
         </View>
     );
 }
