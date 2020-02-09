@@ -8,16 +8,17 @@ const client_secret = "RSG1rNXCw0";
 
 //검색결과 
 var search_List;
+var str='사상';
 
 //검색 키워드
-const NaverSearch = () => {
+const NaverSearch = ({keyWord}) => {
     axios.get('https://openapi.naver.com/v1/search/local.json?display=10&start=1',{
         headers: {
             'X-Naver-Client-Id': 'eDiVdTnGWLaOJWuEnE45',
             'X-Naver-Client-Secret': 'RSG1rNXCw0'
         },
         params: {
-            query: '사상',
+            query: `${keyWord}`,
         }
     }).then(res => {
         const nameList = res.data;
@@ -27,7 +28,7 @@ const NaverSearch = () => {
             // console.log(search_List.items[i]['name']);
             console.log(search_List.items[i]['title']);
         }
-        //console.log(search_List);
+        console.log(search_List);
     }).catch(error => {
         console.log(error);
     })
@@ -40,9 +41,15 @@ function MapScreen({navigation}) {
             <MapView
                 style={StyleSheet.absoluteFillObject} provider={PROVIDER_GOOGLE}>
             </MapView>
-            <View style={{position:'absolute'}}>
+            <View style={{flex: 1, position:'absolute', flexDirection: 'row'}}>
+                <TextInput
+                    style={{borderWidth:1, width: 100, height: 40}}
+                    onChangeText={text => inputKeyWord(text)}
+                    value={keyWord}
+                />
                 <Button
                     title="검색"
+                    onPress={() => NaverSearch({keyWord})}
                 />
             </View>
         </View>
