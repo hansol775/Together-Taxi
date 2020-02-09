@@ -189,13 +189,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-firestore'
 
-//     implementation(project(':react-native-maps')){
-//        exclude group: 'com.google.android.gms', module: 'play-services-base'
-//        exclude group: 'com.google.android.gms', module: 'play-services-maps'
-//    }
-//    implementation 'com.google.android.gms:play-services-base:10.0.1'
-//    implementation 'com.google.android.gms:play-services-maps:10.0.1'
-
+    implementation project(':react-native-maps')
+    implementation 'com.google.android.gms:play-services-base:16.1.0'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")
