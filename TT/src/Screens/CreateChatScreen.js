@@ -18,20 +18,25 @@ const createRoom = async (keyWord,{navigation}) => {
     firestore().collection("Messages").add({
     }).then( (ref) => {    
         //create ChatList      
-        firestore().collection("ChatList").doc(curUID).set({
-            info:{
-                lastMessage : '',
-                photoUrl : curPhoto,
-                CID : ref.id,
-                departure : [0,0],
-                destination : [0,0],
-                time : [0,0]
-            }
+        firestore()
+        .collection("ChatList")
+        .doc(curUID).collection("ChatRoom")
+        .doc(ref.id).set({
+            lastMessage : '',
+            photoUrl : curPhoto,
+            CID : ref.id,
+            departure : [0,0],
+            destination : [0,0],
+            time : [0,0]
         });
          //create ChatUsers
-        return firestore().collection("ChatUsers").doc(ref.id).set({
-            user:curUID
-        },{merge : true });
+        return firestore()
+        .collection("ChatUsers")
+        .doc(ref.id)
+        .collection("user")
+        .doc(curUID).set({
+            user : curUID
+        });
     });
     console.log("완료");
     navigation.navigate('Chatting')
