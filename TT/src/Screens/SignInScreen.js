@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, RefreshControl } from 'react-native';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-community/google-signin';
 import { firebase } from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+
 
 
   /*
@@ -13,8 +15,9 @@ import { firebase } from '@react-native-firebase/auth';
         }
     }*/
     
-    var isSigned=false;
-    
+    let isSigned=false;
+    let curUserName='';
+
     GoogleSignin.configure({
         scopes: ['https://www.googleapis.com/auth/drive.readonly'],
         webClientId: '1021270350335-r0lag7h4f24s3nt8j5nens5jnrtcqg1k.apps.googleusercontent.com',
@@ -27,13 +30,22 @@ import { firebase } from '@react-native-firebase/auth';
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
             //this.setState({ userInfo: userInfo, loggedIn: true });
-            isSigned=true;
-
+        
             // create a new firebase credential with the token
             const credential = firebase.auth.GoogleAuthProvider.credential(userInfo.idToken, userInfo.accessToken)
             // login with credential
             const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
+           
+            firestore().collection('Users')
+            .doc(firebase.auth().currentUser.uid)
+            .set({
+                name : userInfo.user.name,
+                photoUrl : userInfo.user.photo,
+                email : userInfo.user.email,
+                acocunt : '',
+            });
 
+            isSigned=true;
             console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()));
             navigation.navigate('MapDrawer');
         } catch (error) {
@@ -61,10 +73,13 @@ import { firebase } from '@react-native-firebase/auth';
                 console.log("로그인을 먼저 해주세요");
                 return;
             }
-            await GoogleSignin.revokeAccess();
+            //await GoogleSignin.revokeAccess();
             await GoogleSignin.signOut();
+            await firebase.auth().signOut();
             //this.setState({ user: null, loggedIn: false }); // Remember to remove the user from your app's state as well
+            
             isSigned=false;
+            curUserName=null;
             console.log(isSigned);
             console.log("로그아웃되었습니다");
         } catch (error) {
@@ -72,13 +87,37 @@ import { firebase } from '@react-native-firebase/auth';
         }
     };
 
-function SignInScreen({navigation}) {
+const sample = async () =>{
+    await firestore().collection('Users').onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change)=>{
+            //console.log(change.doc.data().email);
+        });
+    });
+    await firestore().collection('Users').doc("3ZbZYtLdDYQMtI2xHOBgYvPCwDk2").get().then(
+        (doc)=>{//console.log("a",doc.data());
+    });
+    console.log("currentUser.uid ",firebase.auth().currentUser.uid);
+    console.log("isSigned ",isSigned)
 
+
+};
+function SignInScreen({navigation}) {
+    let tmp=firebase.auth().currentUser;
+    if(tmp==null){
+        curUserName=null;
+        isSigned=false;
+    }else{
+        curUserName = tmp.displayName;
+        isSigned=true;
+    }
+    tmp=null;
+    console.log("curUserName: ",curUserName);
     return (
         <View style={{alignItems:'center', justifyContent:'center', flex:1}}>
+            <Text> {curUserName}님 환영합니다 </Text>
             <Button 
-                title="로그인상태"
-                onPress={()=>{console.log(isSigned)}}/>
+                title="테스트용버튼(나중에 없애겠습니다)"
+                onPress={sample}/>
             <GoogleSigninButton
                             style={{ width: 192, height: 48 }}
                             size={GoogleSigninButton.Size.Wide}

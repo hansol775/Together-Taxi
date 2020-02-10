@@ -7,17 +7,19 @@ import SignInScreen from '../Screens/SignInScreen';
 import MapScreen from '../Screens/MapScreen';
 import ChatListScreen from '../Screens/ChatListScreen';
 import ChattingScreen from '../Screens/ChattingScreen';
+import tmp from '../Screens/CreateChatScreen';
 
 const ChatStack = createStackNavigator();
 
 function ChattingStack() {
     return(
         <ChatStack.Navigator>
-            <ChatStack.Screen name="ChatList" component={ChatListScreen} options={{headerShown:false}}/>
-            <ChatStack.Screen name="Chatting" component={ChattingScreen} options={{headerShown:false}}/>
+            <ChatStack.Screen name="ChatList" component={ChatListScreen}/>
+            <ChatStack.Screen name="Chatting" component={ChattingScreen}/>
+            <ChatStack.Screen name="ChatCre" component={tmp}/>
         </ChatStack.Navigator>
     )
-}
+};
 
 const Drawer = createDrawerNavigator();
 
@@ -25,11 +27,11 @@ const Drawer = createDrawerNavigator();
 function MapDrawer() {
     return(
         <Drawer.Navigator>
-            <Drawer.Screen name="Map" component={MapScreen} options={{headerShown:false}}/>
-            <Drawer.Screen name="Chat" component={ChattingStack} options={{headerShown:false}}/>
+            <Drawer.Screen name="Map" component={MapScreen} />
+            <Drawer.Screen name="Chat" component={ChattingStack} />
         </Drawer.Navigator>
     );
-}
+};
 
 const Stack = createStackNavigator();
 
@@ -37,10 +39,10 @@ const Stack = createStackNavigator();
 function SignInNavigator() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="SignIn" component={SignInScreen} options={{headerShown:false}}/>
-            <Stack.Screen name="MapDrawer" component={MapDrawer} options={{headerShown:false}}/>
+            <Stack.Screen name="SignIn" component={SignInScreen} />
+            <Stack.Screen name="MapDrawer" component={MapDrawer} />
         </Stack.Navigator>
     );
-}
+};
 
 export default SignInNavigator;

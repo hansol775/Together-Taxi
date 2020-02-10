@@ -64,6 +64,10 @@ function MapScreen({ navigation }) {
                     title="검색"
                     onPress={() => NaverSearch({keyWord})}
                 />
+                <Button
+                    title="draw"
+                    onPress={()=> navigation.openDrawer()}
+                />
             </View>
             <RBSheet
                 ref={ref => {
