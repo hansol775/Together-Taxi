@@ -39,7 +39,7 @@ const ChatListScreen = ({ navigation }) => {
                 title="채팅방만들기(나중에 수정)"
                 onPress={() => navigation.navigate('ChatCre')}
             />
-            <Button title="getval"
+            <Button title="getval(테스트용 나중에지울게요)"
                 onPress={getChatList} />
         </View>
     )
