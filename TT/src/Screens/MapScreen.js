@@ -1,15 +1,13 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import { StyleSheet, View, Text, Button, TextInput, ScrollView, Animated } from 'react-native';
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import axios from 'axios';
+import RBSheet from "react-native-raw-bottom-sheet";
 
 
-const client_id = "eDiVdTnGWLaOJWuEnE45";
-const client_secret = "RSG1rNXCw0";
 
 //검색결과 
 var search_List;
-var str='사상';
 
 //검색 키워드
 const NaverSearch = ({keyWord}) => {
@@ -39,10 +37,22 @@ function MapScreen({ navigation }) {
     const [keyWord, inputKeyWord] = useState('목적지 검색');
 
     return (
-
         <View style={StyleSheet.absoluteFillObject}>
             <MapView
-                style={StyleSheet.absoluteFillObject} provider={PROVIDER_GOOGLE}>
+                style={StyleSheet.absoluteFillObject} provider={PROVIDER_GOOGLE}
+                initialRegion={{
+                    longitude: 128.9682,
+                    latitude: 35.1163,
+                    latitudeDelta: 0.0522,
+                    longitudeDelta: 0.0421,
+                }}>
+                <Marker
+                    coordinate={{
+                        longitude: 128.9682,
+                        latitude: 35.1163,
+                    }}
+                    onPress={() => {this.RBSheet.open()}}
+                />
             </MapView>
             <View style={{flex: 1, position:'absolute', flexDirection: 'row'}}>
                 <TextInput
@@ -51,11 +61,25 @@ function MapScreen({ navigation }) {
                     value={keyWord}
                 />
                 <Button
-
                     title="검색"
                     onPress={() => NaverSearch({keyWord})}
                 />
             </View>
+            <RBSheet
+                ref={ref => {
+                    this.RBSheet=ref;
+                }}
+                height={300}
+                duration={250} 
+            >
+                <View>
+                    <Text>Hellllllo~</Text>
+                    <Button
+                        title="채팅방"
+                        onPress={() => navigation.navigate('Chat')}
+                    />
+                </View>
+            </RBSheet>
         </View>
     );
 }

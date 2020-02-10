@@ -13,8 +13,8 @@ const ChatStack = createStackNavigator();
 function ChattingStack() {
     return(
         <ChatStack.Navigator>
-            <ChatStack.Screen name="ChatList" component={ChatListScreen}/>
-            <ChatStack.Screen name="Chatting" component={ChattingScreen}/>
+            <ChatStack.Screen name="ChatList" component={ChatListScreen} options={{headerShown:false}}/>
+            <ChatStack.Screen name="Chatting" component={ChattingScreen} options={{headerShown:false}}/>
         </ChatStack.Navigator>
     )
 }
@@ -25,8 +25,8 @@ const Drawer = createDrawerNavigator();
 function MapDrawer() {
     return(
         <Drawer.Navigator>
-            <Drawer.Screen name="Map" component={MapScreen} />
-            <Drawer.Screen name="Chat" component={ChattingStack} />
+            <Drawer.Screen name="Map" component={MapScreen} options={{headerShown:false}}/>
+            <Drawer.Screen name="Chat" component={ChattingStack} options={{headerShown:false}}/>
         </Drawer.Navigator>
     );
 }
@@ -37,8 +37,8 @@ const Stack = createStackNavigator();
 function SignInNavigator() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="SignIn" component={SignInScreen} />
-            <Stack.Screen name="MapDrawer" component={MapDrawer} />
+            <Stack.Screen name="SignIn" component={SignInScreen} options={{headerShown:false}}/>
+            <Stack.Screen name="MapDrawer" component={MapDrawer} options={{headerShown:false}}/>
         </Stack.Navigator>
     );
 }
