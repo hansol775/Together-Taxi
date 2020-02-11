@@ -3,6 +3,8 @@ import { StyleSheet, View, Text, Button, TextInput, ScrollView, Animated } from 
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import axios from 'axios';
 import RBSheet from "react-native-raw-bottom-sheet";
+import { Icon } from 'react-native-elements'
+
 
 
 
@@ -33,6 +35,8 @@ const NaverSearch = ({keyWord}) => {
     })
 }
 
+
+
 function MapScreen({ navigation }) {
     const [keyWord, inputKeyWord] = useState('목적지 검색');
 
@@ -54,9 +58,15 @@ function MapScreen({ navigation }) {
                     onPress={() => {this.RBSheet.open()}}
                 />
             </MapView>
-            <View style={{flex: 1, position:'absolute', flexDirection: 'row'}}>
+            <View style={{flex: 1, position:'absolute', flexDirection: 'row', justifyContent: 'space-around'}}>
+                <Icon
+                    style={{alignSelf:'flex-start', margin: 30}}
+                    size={30}
+                    name='menu'
+                    onPress={() => navigation.openDrawer()}
+                />
                 <TextInput
-                    style={{borderWidth:1, width: 100, height: 40}}
+                    style={{margin: 10, borderWidth:1, width: 200, height: 20, alignSelf: 'flex-end'}}
                     onChangeText={text => inputKeyWord(text)}
                     value={keyWord}
                 />
@@ -64,20 +74,18 @@ function MapScreen({ navigation }) {
                     title="검색"
                     onPress={() => NaverSearch({keyWord})}
                 />
-                <Button
-                    title="draw"
-                    onPress={()=> navigation.openDrawer()}
-                />
             </View>
             <RBSheet
                 ref={ref => {
                     this.RBSheet=ref;
                 }}
-                height={300}
+                height={150}
                 duration={250} 
             >
                 <View>
-                    <Text>Hellllllo~</Text>
+                    <Text>출발지 : </Text>
+                    <Text>도착지 : </Text>
+                    <Text>출발 시간 : </Text>
                     <Button
                         title="채팅방"
                         onPress={() => navigation.navigate('Chat')}
