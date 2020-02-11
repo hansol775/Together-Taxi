@@ -37,6 +37,8 @@ target 'TT' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Firestore', '~> 6.13.0'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
  
   target 'TTTests' do
     inherit! :search_paths
