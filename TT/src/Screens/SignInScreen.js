@@ -1,22 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, Button, RefreshControl } from 'react-native';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-community/google-signin';
 import { firebase } from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
-
-
-  /*
-    constructor(props) {
-        super(props);
-        this.state = {
-            pushData: [],
-            loggedIn: false//로그인 되잇으면 true 안되잇으면 false
-        }
-    }*/
-    
-    let isSigned=false;
-    let curUserName='';
 
     GoogleSignin.configure({
         scopes: ['https://www.googleapis.com/auth/drive.readonly'],
@@ -25,7 +12,7 @@ import firestore from '@react-native-firebase/firestore';
     
 
     //구글 로그인
-    const _signIn = async function(navigation){//funtion이랑 =>이랑 같음
+    const _signIn = async function(navigation,setIsSigned,setUserName){//funtion이랑 =>이랑 같음
         try {
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
@@ -45,7 +32,8 @@ import firestore from '@react-native-firebase/firestore';
                 acocunt : '',
             });
 
-            isSigned=true;
+            setIsSigned(true);
+            setUserName(userInfo.user.name);
             console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()));
             navigation.navigate('MapDrawer');
         } catch (error) {
@@ -67,7 +55,7 @@ import firestore from '@react-native-firebase/firestore';
         }
     };
     //구글 로그아웃
-    const signOut = async () => {
+    const signOut = async (isSigned,setIsSigned,setUserName) => {
         try {
             if(isSigned === false){
                 console.log("로그인을 먼저 해주세요");
@@ -78,9 +66,8 @@ import firestore from '@react-native-firebase/firestore';
             await firebase.auth().signOut();
             //this.setState({ user: null, loggedIn: false }); // Remember to remove the user from your app's state as well
             
-            isSigned=false;
-            curUserName=null;
-            console.log(isSigned);
+            setIsSigned(false);
+            setUserName('');
             console.log("로그아웃되었습니다");
         } catch (error) {
             console.error(error);
@@ -102,19 +89,16 @@ const sample = async () =>{
 
 };
 function SignInScreen({navigation}) {
-    let tmp=firebase.auth().currentUser;
-    if(tmp==null){
-        curUserName=null;
-        isSigned=false;
-    }else{
-        curUserName = tmp.displayName;
-        isSigned=true;
-    }
+    let tmp=firebase.auth().currentUser;//로그인안되있으면 null반환함
+    
+    let [userName,setUserName]=useState(tmp.displayName);
+    let [isSigned,setIsSigned]=useState(userName!=null);
+    
     tmp=null;
-    console.log("curUserName: ",curUserName);
+    console.log("curUserName: ",userName);
     return (
         <View style={{alignItems:'center', justifyContent:'center', flex:1}}>
-            <Text> {curUserName}님 환영합니다 </Text>
+            {isSigned && <Text> {userName}님 환영합니다 </Text>}
             <Button 
                 title="테스트용버튼(나중에 없애겠습니다)"
                 onPress={sample}/>
@@ -122,12 +106,13 @@ function SignInScreen({navigation}) {
                             style={{ width: 192, height: 48 }}
                             size={GoogleSigninButton.Size.Wide}
                             color={GoogleSigninButton.Color.Dark}
-                            onPress={() => _signIn(navigation)}
+                            onPress={() => _signIn(navigation,setIsSigned,setUserName)}
+                            disabled={isSigned}
                             />
-            <Button
+            {isSigned && <Button
                 title="로그아웃"
-                onPress={()=> signOut()}
-                />
+                onPress={()=> signOut(isSigned,setIsSigned,setUserName)}
+                />}
             <Button
                 title="Map"
                 onPress={() => navigation.navigate('MapDrawer')}
