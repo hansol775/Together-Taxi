@@ -23,6 +23,7 @@ const createRoom = async (keyWord,{navigation}) => {
         .doc(curUID).collection("ChatRoom")
         .doc(ref.id).set({
             lastMessage : '',
+            lastMessageTime : new Date().getTime(),
             photoUrl : curPhoto,
             CID : ref.id,
             departure : [0,0],
