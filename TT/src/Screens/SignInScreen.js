@@ -90,8 +90,15 @@ const sample = async () =>{
 };
 function SignInScreen({navigation}) {
     let tmp=firebase.auth().currentUser;//로그인안되있으면 null반환함
+    let disname=null;
     
-    let [userName,setUserName]=useState(tmp.displayName);
+    if(tmp ===null){
+        disname=null;
+    }else{
+        disname=tmp.displayName;
+    }
+
+    let [userName,setUserName]=useState(disname);
     let [isSigned,setIsSigned]=useState(userName!=null);
     
     tmp=null;
@@ -107,7 +114,6 @@ function SignInScreen({navigation}) {
                             size={GoogleSigninButton.Size.Wide}
                             color={GoogleSigninButton.Color.Dark}
                             onPress={() => _signIn(navigation,setIsSigned,setUserName)}
-                            disabled={isSigned}
                             />
             {isSigned && <Button
                 title="로그아웃"
